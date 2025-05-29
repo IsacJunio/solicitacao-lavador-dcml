@@ -1,0 +1,46 @@
+:root {
+    --main:#111;
+    --fundo-card:#F2F2F2;
+    --text-principal:#ffffff;
+    --paragrafo:#333333;
+    --botoes:#E60000;
+    --botoes-hover:#990000;
+    --botoes-text:#FFFFFF;
+    }
+
+.painel {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 20px;
+  justify-content: center;
+  background-color: #111;
+  min-height: 100vh;
+}
+
+.card-solicitacao {
+  background: #222;
+  color: white;
+  border-left: 6px solid gray;
+  padding: 16px;
+  width: 300px;
+  border-radius: 10px;
+  font-family: 'Courier New', monospace;
+  font-size: 1.2rem;
+  box-shadow: 0 0 8px rgba(0,0,0,0.5);
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.card-solicitacao h2, p {
+  margin-bottom: 0.5rem;
+}
+
+.card-solicitacao:hover {
+  transform: scale(1.03);
+}
+
+/* Estilo por prioridade (pode expandir com Alta, Urgente, etc) */
+.prioridade-normal {
+  border-left-color:var(--botoes-hover);
+}
