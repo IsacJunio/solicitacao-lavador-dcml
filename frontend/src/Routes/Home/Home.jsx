@@ -70,8 +70,6 @@ const Home = () => {
                 <input name="peca_indentificada" value={form.peca_indentificada} onChange={handleChange} placeholder="Peça Identificada" />
                 <input name="data_entrada" value={form.data_entrada} onChange={handleChange} placeholder="Data Entrada" />
                 <input name="hora_entrada" value={form.hora_entrada} onChange={handleChange} placeholder="Hora Entrada" />
-                <input name="data_saida" value={form.data_saida} onChange={handleChange} placeholder="Data Saída" />
-                <input name="hora_saida" value={form.hora_saida} onChange={handleChange} placeholder="Hora Saída" />
                 <input name="prioridade" value={form.prioridade} onChange={handleChange} placeholder="Prioridade" />
                 <input name="setor" value={form.setor} onChange={handleChange} placeholder="Setor" />
               </div>
