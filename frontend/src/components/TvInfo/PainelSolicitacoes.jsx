@@ -17,21 +17,19 @@ function PainelSolicitacoes({ onSelect }) {
       SolicitacaoApi.getAll().then(setSolicitacoes);
     }, 10000); // a cada 10 segundos
 
-    socket.on("novaSolicitacao", () => {
-      SolicitacaoApi.getAll().then(setSolicitacoes);
-    });
-    socket.on("solicitacaoRemovida", () => {
-      SolicitacaoApi.getAll().then(setSolicitacoes);
-    });
-    socket.on("solicitacaoAtualizada", () => {
-      SolicitacaoApi.getAll().then(setSolicitacoes);
-    });
+    const reloadPage = () => {
+      window.location.reload();
+    };
+
+    socket.on("novaSolicitacao", reloadPage);
+    socket.on("solicitacaoRemovida", reloadPage);
+    socket.on("solicitacaoAtualizada", reloadPage);
 
     return () => {
       clearInterval(interval);
-      socket.off("novaSolicitacao");
-      socket.off("solicitacaoRemovida");
-      socket.off("solicitacaoAtualizada");
+      socket.off("novaSolicitacao", reloadPage);
+      socket.off("solicitacaoRemovida", reloadPage);
+      socket.off("solicitacaoAtualizada", reloadPage);
     };
   }, []);
 
