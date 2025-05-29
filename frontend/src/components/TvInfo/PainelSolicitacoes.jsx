@@ -3,16 +3,20 @@ import { io } from "socket.io-client";
 import CardSolicitacao from "./CardSolicitacao";
 import SolicitacaoApi from "../../services/Solicitacao";
 
-const socket = io("https://solicitacao-lavador-dcml.onrender.com/api/solicitacoes");
+const socket = io(
+  "https://solicitacao-lavador-dcml.onrender.com/api/solicitacoes"
+);
 
 function PainelSolicitacoes({ onSelect }) {
   const [solicitacoes, setSolicitacoes] = useState([]);
 
   useEffect(() => {
-    // Busca inicial ao montar o componente
     SolicitacaoApi.getAll().then(setSolicitacoes);
 
-    // Atualiza a lista ao receber qualquer evento
+    const interval = setInterval(() => {
+      SolicitacaoApi.getAll().then(setSolicitacoes);
+    }, 10000); // a cada 10 segundos
+
     socket.on("novaSolicitacao", () => {
       SolicitacaoApi.getAll().then(setSolicitacoes);
     });
@@ -24,6 +28,7 @@ function PainelSolicitacoes({ onSelect }) {
     });
 
     return () => {
+      clearInterval(interval);
       socket.off("novaSolicitacao");
       socket.off("solicitacaoRemovida");
       socket.off("solicitacaoAtualizada");
