@@ -22,7 +22,7 @@ app.use("/api", loginRoutes(prisma));
 app.use("/api", solicitacaoRoutes(prisma, io));
 
 server.listen(port,() => {
-  console.log(`Servidor online http://localhost:${PORT}`);
+  console.log(`Servidor online http://localhost:${port}`);
 });
 
 export {io};
