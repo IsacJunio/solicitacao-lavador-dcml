@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:3000/api/solicitacoes";
+const API_URL = "https://solicitacao-lavador-dcml.onrender.com/api/solicitacoes";
 
 const SolicitacaoApi = {
   create: (data) => axios.post(API_URL, data),

@@ -3,7 +3,7 @@ import { io } from "socket.io-client";
 import CardSolicitacao from "./CardSolicitacao";
 import SolicitacaoApi from "../../services/Solicitacao";
 
-const socket = io("http://localhost:3000");
+const socket = io("https://solicitacao-lavador-dcml.onrender.com");
 
 function PainelSolicitacoes({ onSelect }) {
   const [solicitacoes, setSolicitacoes] = useState([]);
