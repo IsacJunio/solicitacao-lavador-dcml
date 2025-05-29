@@ -6,7 +6,6 @@ import solicitacaoRoutes from "./routes/solicitacao.js";
 import { Server } from 'socket.io';
 import cors from 'cors';
 
-dotenv.config();
 
 const prisma = new PrismaClient()
 
