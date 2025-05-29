@@ -4,7 +4,7 @@ Aplicação web para gerenciamento de solicitações de lavagem de peças, desen
 
 ## Visão Geral
 
-O sistema permite solicitação de salavagem, acompanhamento e atualização de solicitações de lavagem em tempo real, proporcionando maior controle e agilidade no atendimento.
+O sistema permite solicitação de lavagem, acompanhamento e atualização de solicitações de lavagem em tempo real, proporcionando maior controle e agilidade no atendimento.
 
 ## Funcionalidades
 
