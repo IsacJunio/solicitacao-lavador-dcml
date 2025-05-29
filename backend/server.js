@@ -5,7 +5,6 @@ import loginRoutes from "./routes/login.js";
 import solicitacaoRoutes from "./routes/solicitacao.js";
 import { Server } from 'socket.io';
 import cors from 'cors';
-import dotenv from 'dotenv';
 
 dotenv.config();
 
