@@ -1,8 +1,6 @@
 import express from "express";
-import { PrismaClient } from "@prisma/client";
 
 const router = express.Router();
-const prisma = PrismaClient();
 
 export default (prisma, io) => {
   router.get("/solicitacoes", async (req, res) => {
