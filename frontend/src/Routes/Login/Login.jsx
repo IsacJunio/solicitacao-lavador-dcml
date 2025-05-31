@@ -1,14 +1,13 @@
 import React, { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FaArrowAltCircleLeft } from "react-icons/fa";
-import "./Login.css";
-import Api from "../../services/UserLogin";
-import { AuthContext } from "../../../contexts/AuthContext"; // Importa o contexto
+import Api from "../../../services/UserLogin.js";
+import { AuthContext } from "../../../contexts/AuthContext";
 
 function Login() {
   const [values, setValues] = useState({ name: "", password: "" });
   const [error, setError] = useState("");
-  const { setIsAuthenticated } = useContext(AuthContext); // Usa o contexto
+  const { setIsAuthenticated } = useContext(AuthContext);
   const navigate = useNavigate();
 
   function onChange(event) {
@@ -24,20 +23,21 @@ function Login() {
     try {
       const response = await Api.login(values.name, values.password);
       if (response.user) {
-        setIsAuthenticated(true); // Marca como autenticado
-        navigate("/menu"); // Redireciona sem recarregar a página
+        setIsAuthenticated(true);
+        localStorage.setItem("isAuthenticated", "true");
+        navigate("/menu");
       } else {
         setError("Resposta inválida da API.");
       }
     } catch (err) {
+      // Agora o erro é tratado e exibido corretamente
       if (err.response && err.response.data && err.response.data.message) {
         setError(err.response.data.message);
       } else if (err.message) {
         setError(err.message);
       } else {
-        setError("Usuario ou senha inválidos");
+        setError("Usuário ou senha inválidos");
       }
-      console.log("Erro no login:", err);
     }
   }
 

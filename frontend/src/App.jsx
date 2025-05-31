@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthContext";
 import Login from "./Routes/Login/Login";
@@ -11,7 +11,15 @@ function PrivateRoute({ children }) {
 }
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  // Lê o valor salvo no localStorage ao iniciar
+  const [isAuthenticated, setIsAuthenticated] = useState(
+    localStorage.getItem("isAuthenticated") === "true"
+  );
+
+  // Sempre que mudar, salva no localStorage
+  useEffect(() => {
+    localStorage.setItem("isAuthenticated", isAuthenticated ? "true" : "false");
+  }, [isAuthenticated]);
 
   return (
     <AuthContext.Provider value={{ isAuthenticated, setIsAuthenticated }}>
