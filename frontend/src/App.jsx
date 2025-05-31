@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { useState, createContext, useContext } from "react";
 import Login from "./Routes/Login/Login";
 import Home from "./Routes/Home/Home";
@@ -11,6 +11,7 @@ function PrivateRoute({ children }) {
   const { isAuthenticated } = useAuth();
   return isAuthenticated ? children : <Navigate to="/login" />;
 }
+
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   return (
@@ -33,4 +34,5 @@ function App() {
   );
 }
 
+export { AuthContext }; // Adicione esta linha!
 export default App;
