@@ -2,8 +2,8 @@ import React, { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FaArrowAltCircleLeft } from "react-icons/fa";
 import "./Login.css";
-import Api from "../../services/UserLogin.js";
-import { AuthContext } from "../../App"; // Importa o contexto
+import Api from "../../services/UserLogin";
+import { AuthContext } from "../../contexts/AuthContext"; // Importa o contexto
 
 function Login() {
   const [values, setValues] = useState({ name: "", password: "" });
