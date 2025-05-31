@@ -1,21 +1,32 @@
-import { useState } from "react";
-import { Link, useLocation } from "react-router-dom"
-import "./Header.css"
-import { FaHome, FaUser,  FaBars, FaTimes } from "react-icons/fa"
+import { useEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
+import "./Header.css";
+import { FaHome, FaUser, FaBars, FaTimes } from "react-icons/fa";
 
-// ...restante do código...
-function Header({ onSolicitar }){
+function Header({ onSolicitar }) {
   const location = useLocation();
-   const [menuOpen, setMenuOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(
+    localStorage.getItem("isAuthenticated") === "true"
+  );
+
+  // Atualiza se mudar o localStorage (ex: logout)
+  useEffect(() => {
+    const onStorage = () => {
+      setIsAuthenticated(localStorage.getItem("isAuthenticated") === "true");
+    };
+    window.addEventListener("storage", onStorage);
+    return () => window.removeEventListener("storage", onStorage);
+  }, []);
 
   const titulos = {
-  "/": "Solicitação do Lavador",
-  "/menu": "Menu"
-};
-const titulo = titulos[location.pathname] || "";
+    "/": "Solicitação do Lavador",
+    "/menu": "Menu",
+  };
+  const titulo = titulos[location.pathname] || "";
 
   return (
-      <header className="header">
+    <header className="header">
       <div className="header__logo">DCML</div>
       <div className="header__titulo">{titulo}</div>
       <button
@@ -28,18 +39,31 @@ const titulo = titulos[location.pathname] || "";
       <nav className={`header__nav ${menuOpen ? "open" : ""}`}>
         {location.pathname === "/" && (
           <>
-            <Link to="/login" className="header__link" onClick={() => setMenuOpen(false)}>
-              <FaUser /> Login
+            <Link
+              to="/login"
+              className="header__link"
+              onClick={() => setMenuOpen(false)}
+            >
+              <FaUser />
+              {!isAuthenticated && " Login"}
             </Link>
-            <button className="header__button-home" onClick={() => {setMenuOpen(false);
-              if (onSolicitar) onSolicitar();
-            }}>
+            <button
+              className="header__button-home"
+              onClick={() => {
+                setMenuOpen(false);
+                if (onSolicitar) onSolicitar();
+              }}
+            >
               Solicitar
             </button>
           </>
         )}
         {location.pathname === "/menu" && (
-          <Link to="/" className="header__link header__link-home" onClick={() => setMenuOpen(false)}>
+          <Link
+            to="/"
+            className="header__link header__link-home"
+            onClick={() => setMenuOpen(false)}
+          >
             <FaHome /> Inícios
           </Link>
         )}
@@ -48,4 +72,4 @@ const titulo = titulos[location.pathname] || "";
   );
 }
 
-export default Header
+export default Header;
