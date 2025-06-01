@@ -32,7 +32,7 @@ function Login() {
       const response = await Api.login(values.name, values.password);
       if (response.user) {
         setIsAuthenticated(true);
-        localStorage.setItem("isAuthenticated", "true");
+        sessionStorage.setItem("isAuthenticated", "true");
         navigate("/menu");
       } else {
         setError("Resposta inválida da API.");

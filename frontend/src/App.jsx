@@ -13,7 +13,7 @@ function PrivateRoute({ children }) {
 function App() {
   // Lê o valor salvo no localStorage ao iniciar
   const [isAuthenticated, setIsAuthenticated] = useState(
-    localStorage.getItem("isAuthenticated") === "true"
+    sessionStorage.getItem("isAuthenticated") === "true"
   );
 
   // Sempre que mudar, salva no localStorage

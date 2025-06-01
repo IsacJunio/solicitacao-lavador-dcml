@@ -7,13 +7,13 @@ function Header({ onSolicitar }) {
   const location = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(
-    localStorage.getItem("isAuthenticated") === "true"
+    sessionStorage.getItem("isAuthenticated") === "true"
   );
 
   // Atualiza se mudar o localStorage (ex: logout)
   useEffect(() => {
     const onStorage = () => {
-      setIsAuthenticated(localStorage.getItem("isAuthenticated") === "true");
+      setIsAuthenticated(sessionStorage.getItem("isAuthenticated") === "true");
     };
     window.addEventListener("storage", onStorage);
     return () => window.removeEventListener("storage", onStorage);
