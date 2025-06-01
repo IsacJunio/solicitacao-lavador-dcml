@@ -24,7 +24,7 @@ const Home = () => {
 
   function handleChange(e) {
     const { name, value } = e.target;
-    setForm(prev => ({ ...prev, [name]: value }));
+    setForm((prev) => ({ ...prev, [name]: value }));
   }
 
   function handleSubmit(e) {
@@ -38,7 +38,7 @@ const Home = () => {
         setForm(initialFormState);
         setModalOpen(false);
       })
-      .catch(err => {
+      .catch((err) => {
         alert("Erro ao salvar solicitação!");
         console.error(err);
       });
@@ -64,18 +64,68 @@ const Home = () => {
             <form className="form-solicitacao" onSubmit={handleSubmit}>
               <h2>Nova Solicitação</h2>
               <div className="form-grid">
-                <input name="name" value={form.name} onChange={handleChange} placeholder="Nome" required />
-                <input name="nm" value={form.nm} onChange={handleChange} placeholder="NM" required />
-                <input name="componente" value={form.componente} onChange={handleChange} placeholder="Componente" required />
-                <input name="peca_indentificada" value={form.peca_indentificada} onChange={handleChange} placeholder="Peça Identificada" />
-                <input name="data_entrada" value={form.data_entrada} onChange={handleChange} placeholder="Data Entrada" />
-                <input name="hora_entrada" value={form.hora_entrada} onChange={handleChange} placeholder="Hora Entrada" />
-                <input name="prioridade" value={form.prioridade} onChange={handleChange} placeholder="Prioridade" />
-                <input name="setor" value={form.setor} onChange={handleChange} placeholder="Setor" />
+                <input
+                  name="name"
+                  value={form.name}
+                  onChange={handleChange}
+                  placeholder="Nome"
+                  required
+                />
+                <input
+                  name="nm"
+                  value={form.nm}
+                  onChange={handleChange}
+                  placeholder="NM"
+                  required
+                />
+                <input
+                  name="componente"
+                  value={form.componente}
+                  onChange={handleChange}
+                  placeholder="Componente"
+                  required
+                />
+                <input
+                  name="peca_indentificada"
+                  value={form.peca_indentificada}
+                  onChange={handleChange}
+                  placeholder="Peça Identificada"
+                  required
+                />
+                <input
+                  name="data_entrada"
+                  value={form.data_entrada}
+                  onChange={handleChange}
+                  placeholder="Data Entrada"
+                  required
+                />
+                <input
+                  name="hora_entrada"
+                  value={form.hora_entrada}
+                  onChange={handleChange}
+                  placeholder="Hora Entrada"
+                  required
+                />
+                <input
+                  name="prioridade"
+                  value={form.prioridade}
+                  onChange={handleChange}
+                  placeholder="Prioridade"
+                  required
+                />
+                <input
+                  name="setor"
+                  value={form.setor}
+                  onChange={handleChange}
+                  placeholder="Setor"
+                  required
+                />
               </div>
               <div className="form-actions">
                 <button type="submit">Adicionar</button>
-                <button type="button" onClick={handleCloseModal}>Cancelar</button>
+                <button type="button" onClick={handleCloseModal}>
+                  Cancelar
+                </button>
               </div>
             </form>
           </div>
