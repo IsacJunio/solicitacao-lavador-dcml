@@ -16,6 +16,7 @@ const initialFormState = {
   prioridade: "",
   setor: "",
   lavador: "",
+  responsaveis: "",
 };
 
 const Menu = () => {
@@ -23,41 +24,60 @@ const Menu = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [editId, setEditId] = useState(null);
 
+  // Função para capitalizar primeira letra
+  const capitalizeFirstLetter = (str) => {
+    if (!str) return str;
+    return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+  };
+
   function handleChange(e) {
     const { name, value } = e.target;
-    setForm(prev => ({ ...prev, [name]: value }));
+    // Capitaliza o valor imediatamente ao digitar
+    const newValue = name === 'nm' ? value : capitalizeFirstLetter(value);
+    setForm(prev => ({ ...prev, [name]: newValue }));
   }
 
   function handleSubmit(e) {
-  e.preventDefault();
-  // Remova o id do objeto enviado para o update
-  const { id, ...formToSend } = {
-    ...form,
-    nm: Number(form.nm),
-  };
-  if (editId) {
-    SolicitacaoApi.update(editId, formToSend)
-      .then(() => {
-        setForm(initialFormState);
-        setEditId(null);
-        setModalOpen(false);
-      })
-      .catch(err => {
-        alert("Erro ao atualizar solicitação!");
-        console.error(err);
-      });
-  } else {
-    SolicitacaoApi.create(formToSend)
-      .then(() => {
-        setForm(initialFormState);
-        setModalOpen(false);
-      })
-      .catch(err => {
-        alert("Erro ao salvar solicitação!");
-        console.error(err);
-      });
+    e.preventDefault();
+    // Capitaliza os campos de texto
+    const formCapitalized = {
+      ...form,
+      name: capitalizeFirstLetter(form.name),
+      componente: capitalizeFirstLetter(form.componente),
+      peca_indentificada: capitalizeFirstLetter(form.peca_indentificada),
+      prioridade: capitalizeFirstLetter(form.prioridade),
+      setor: capitalizeFirstLetter(form.setor),
+      lavador: capitalizeFirstLetter(form.lavador),
+      responsaveis: form.responsaveis ? capitalizeFirstLetter(form.responsaveis) : form.responsaveis,
+      nm: Number(form.nm),
+    };
+
+    // Remove o id antes de enviar
+    const { id: _, ...formToSend } = formCapitalized;
+
+    if (editId) {
+      SolicitacaoApi.update(editId, formToSend)
+        .then(() => {
+          setForm(initialFormState);
+          setEditId(null);
+          setModalOpen(false);
+        })
+        .catch(err => {
+          alert("Erro ao atualizar solicitação!");
+          console.error(err);
+        });
+    } else {
+      SolicitacaoApi.create(formToSend)
+        .then(() => {
+          setForm(initialFormState);
+          setModalOpen(false);
+        })
+        .catch(err => {
+          alert("Erro ao salvar solicitação!");
+          console.error(err);
+        });
+    }
   }
-}
 
   function handleCloseModal() {
     setForm(initialFormState);
@@ -66,8 +86,16 @@ const Menu = () => {
   }
 
   function handleSelectSolicitacao(item) {
+    // Capitaliza os valores ao carregar para edição
     setForm({
       ...item,
+      name: capitalizeFirstLetter(item.name),
+      componente: capitalizeFirstLetter(item.componente),
+      peca_indentificada: capitalizeFirstLetter(item.peca_indentificada),
+      prioridade: capitalizeFirstLetter(item.prioridade),
+      setor: capitalizeFirstLetter(item.setor),
+      lavador: capitalizeFirstLetter(item.lavador),
+      responsaveis: item.responsaveis ? capitalizeFirstLetter(item.responsaveis) : item.responsaveis,
       nm: item.nm.toString()
     });
     setEditId(item.id);

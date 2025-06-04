@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { io } from "socket.io-client";
 import CardSolicitacao from "./CardSolicitacao";
 import SolicitacaoApi from "../../services/Solicitacao";
+import { useLocation } from "react-router-dom";
 
 const socket = io(
   "https://solicitacao-lavador-dcml.onrender.com/api/solicitacoes"
@@ -9,6 +10,7 @@ const socket = io(
 
 function PainelSolicitacoes({ onSelect }) {
   const [solicitacoes, setSolicitacoes] = useState([]);
+  const location = useLocation();
 
   useEffect(() => {
     SolicitacaoApi.getAll().then(setSolicitacoes);
@@ -35,13 +37,18 @@ function PainelSolicitacoes({ onSelect }) {
     };
   }, []);
 
+  // Filtra solicitações que têm lavador atribuído apenas na página inicial
+  const filteredSolicitacoes = location.pathname === "/" 
+    ? solicitacoes.filter(item => !item.lavador)
+    : solicitacoes;
+
   return (
     <section className="painel">
-      {solicitacoes.map((item) => (
+      {filteredSolicitacoes.map((item) => (
         <CardSolicitacao
           key={item.id}
           item={item}
-          onClick={() => onSelect(item)}
+          onClick={() => onSelect?.(item)}
         />
       ))}
     </section>
