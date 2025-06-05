@@ -32,7 +32,7 @@ const Home = () => {
     const formToSend = {
       ...form,
       nm: Number(form.nm),
-      lavador: form.lavador || "Aberto"
+      lavador: "Aberto"
     };
     SolicitacaoApi.create(formToSend)
       .then(() => {
@@ -126,17 +126,6 @@ const Home = () => {
                   placeholder="Setor"
                   required
                 />
-                <select 
-                  name="lavador" 
-                  value={form.lavador} 
-                  onChange={handleChange} 
-                  required
-                  className="form-select"
-                >
-                  <option value="Aberto">Aberto</option>
-                  <option value="Em Lavagem">Em Lavagem</option>
-                  <option value="Encerrado">Encerrado</option>
-                </select>
               </div>
               <div className="form-actions">
                 <button type="submit">Adicionar</button>
