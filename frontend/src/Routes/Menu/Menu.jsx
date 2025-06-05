@@ -16,7 +16,7 @@ const initialFormState = {
   hora_saida: "",
   prioridade: "",
   setor: "",
-  lavador: "",
+  lavador: "Aberto",
   responsaveis: "",
 };
 
@@ -33,8 +33,8 @@ const Menu = () => {
 
   function handleChange(e) {
     const { name, value } = e.target;
-    // Capitaliza o valor imediatamente ao digitar
-    const newValue = name === 'nm' ? value : capitalizeFirstLetter(value);
+    // Capitaliza o valor imediatamente ao digitar, exceto para nm e lavador
+    const newValue = name === 'nm' || name === 'lavador' ? value : capitalizeFirstLetter(value);
     setForm(prev => ({ ...prev, [name]: newValue }));
   }
 
@@ -48,7 +48,7 @@ const Menu = () => {
       peca_indentificada: capitalizeFirstLetter(form.peca_indentificada),
       prioridade: capitalizeFirstLetter(form.prioridade),
       setor: capitalizeFirstLetter(form.setor),
-      lavador: capitalizeFirstLetter(form.lavador),
+      lavador: form.lavador,
       responsaveis: form.responsaveis ? capitalizeFirstLetter(form.responsaveis) : form.responsaveis,
       nm: Number(form.nm),
     };
@@ -95,7 +95,7 @@ const Menu = () => {
       peca_indentificada: capitalizeFirstLetter(item.peca_indentificada),
       prioridade: capitalizeFirstLetter(item.prioridade),
       setor: capitalizeFirstLetter(item.setor),
-      lavador: capitalizeFirstLetter(item.lavador),
+      lavador: item.lavador,
       responsaveis: item.responsaveis ? capitalizeFirstLetter(item.responsaveis) : item.responsaveis,
       nm: item.nm.toString()
     });
