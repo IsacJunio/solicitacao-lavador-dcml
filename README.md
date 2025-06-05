@@ -1,79 +1,46 @@
-# Solicitação do Lavador
+# Sistema de Solicitação do Lavador
 
-Aplicação web para gerenciamento de solicitações de lavagem de peças, desenvolvida para otimizar o fluxo de trabalho entre operadores e lavadores.
-
-## Visão Geral
-
-O sistema permite solicitação de lavagem, acompanhamento e atualização de solicitações de lavagem em tempo real, proporcionando maior controle e agilidade no atendimento.
+Sistema para gerenciamento de solicitações de lavagem, desenvolvido com React no frontend e Node.js no backend.
 
 ## Funcionalidades
 
-- Cadastro de novas solicitações de lavagem
-- Listagem e detalhamento das solicitações
-- Atualização do status das solicitações
-- Notificações em tempo real para operadores e lavadores
-- Interface responsiva e intuitiva
-- Painel de informações para monitoramento
+- Cadastro de solicitações de lavagem
+- Acompanhamento em tempo real do status das solicitações
+- Sistema de prioridades (Urgente, Importante, Normal)
+- Status de lavagem (Aberto, Em Lavagem, Encerrado)
+- Interface responsiva para desktop e mobile
 
 ## Tecnologias Utilizadas
 
-- **Frontend:** React, Vite, JavaScript, CSS
-- **Backend:** Node.js, Express, Prisma
-- **Banco de Dados:** MongoDB
-- **Comunicação em tempo real:** Socket.io
-- **Hospedagem:** Render
+- Frontend: React.js
+- Backend: Node.js
+- Banco de Dados: MongoDB
+- Comunicação em tempo real: Socket.IO
 
-## Estrutura do Projeto
+## Instalação
 
-```
-Solicitação do Lavador/
-├── backend/
-│   ├── src/
-│   ├── package.json
-│   └── ...
-├── frontend/
-│   ├── src/
-│   ├── public/
-│   ├── dist/
-│   ├── package.json
-│   └── ...
-├── README.md
-└── LICENSE
+1. Clone o repositório
+2. Instale as dependências do frontend e backend:
+```bash
+# Backend
+cd backend
+npm install
+
+# Frontend
+cd frontend
+npm install
 ```
 
-## Instalação e Configuração
+3. Inicie o servidor backend e frontend em terminais separados:
+```bash
+# Backend
+cd backend
+npm start
 
-1. **Clone o repositório:**
-   ```
-   https://github.com/IsacJunio/solicitacao-lavador-dcml.git
-   ```
-
-2. **Configuração do Backend:**
-   - Acesse a pasta `backend`
-   - Instale as dependências:
-     ```
-     npm install
-     ```
-   - Configure as variáveis de ambiente no arquivo `.env`
-   - Inicie o servidor:
-     ```
-     npm start
-     ```
-
-3. **Configuração do Frontend:**
-   - Acesse a pasta `frontend`
-   - Instale as dependências:
-     ```
-     npm install
-     ```
-   - Gere o build de produção:
-     ```
-     npm run build
-     ```
-   - Para desenvolvimento, execute:
-     ```
-     npm run dev
-     ```
+# Frontend
+cd frontend
+npm start
+```
 
 ## Contribuição
 

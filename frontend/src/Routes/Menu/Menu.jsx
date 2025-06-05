@@ -2,6 +2,7 @@ import Header from "../../components/Header/Header";
 import PainelSolicitacoes from "../../components/TvInfo/PainelSolicitacoes";
 import SolicitacaoApi from "../../services/Solicitacao";
 import "../Home/Home.css";
+import "./Menu.css";
 import { useState } from "react";
 
 const initialFormState = {
@@ -135,9 +136,30 @@ const Menu = () => {
                 <input name="hora_entrada" value={form.hora_entrada} onChange={handleChange} placeholder="Hora Entrada" />
                 <input name="data_saida" value={form.data_saida} onChange={handleChange} placeholder="Data Saída" />
                 <input name="hora_saida" value={form.hora_saida} onChange={handleChange} placeholder="Hora Saída" />
-                <input name="prioridade" value={form.prioridade} onChange={handleChange} placeholder="Prioridade" />
+                <select 
+                  name="prioridade" 
+                  value={form.prioridade} 
+                  onChange={handleChange} 
+                  required
+                  className="form-select"
+                >
+                  <option value="">Selecione a Prioridade</option>
+                  <option value="Urgente">Urgente</option>
+                  <option value="Importante">Importante</option>
+                  <option value="Normal">Normal</option>
+                </select>
                 <input name="setor" value={form.setor} onChange={handleChange} placeholder="Setor" />
-                <input name="lavador" value={form.lavador} onChange={handleChange} placeholder="Lavador" />
+                <select 
+                  name="lavador" 
+                  value={form.lavador} 
+                  onChange={handleChange} 
+                  required
+                  className="form-select"
+                >
+                  <option value="Aberto">Aberto</option>
+                  <option value="Em Lavagem">Em Lavagem</option>
+                  <option value="Encerrado">Encerrado</option>
+                </select>
                 <input name="responsaveis" value={form.responsaveis} onChange={handleChange} placeholder="Responsáveis" />
               </div>
               <div className="form-actions">

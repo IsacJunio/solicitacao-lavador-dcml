@@ -8,26 +8,35 @@ const socket = io(
   "https://solicitacao-lavador-dcml.onrender.com/api/solicitacoes"
 );
 
-function PainelSolicitacoes({ onSelect }) {
+const PainelSolicitacoes = ({ onSelect, hideEncerrado }) => {
   const [solicitacoes, setSolicitacoes] = useState([]);
   const location = useLocation();
 
+  const updateSolicitacoes = () => {
+    SolicitacaoApi.getAll()
+      .then((data) => {
+        let filteredData = data;
+        // Na página inicial, mostra apenas solicitações sem lavador atribuído
+        if (location.pathname === "/") {
+          filteredData = data.filter(item => item.lavador === "Aberto");
+        } 
+        // Em outras páginas, se hideEncerrado for true, filtra fora os encerrados
+        else if (hideEncerrado) {
+          filteredData = data.filter(item => item.lavador !== "Encerrado");
+        }
+        setSolicitacoes(filteredData);
+      })
+      .catch((err) => console.error(err));
+  };
+
   useEffect(() => {
-    SolicitacaoApi.getAll().then(setSolicitacoes);
+    updateSolicitacoes();
 
-    const interval = setInterval(() => {
-      SolicitacaoApi.getAll().then(setSolicitacoes);
-    }, 10000); // a cada 10 segundos
+    const interval = setInterval(updateSolicitacoes, 10000);
 
-    socket.on("novaSolicitacao", () => {
-      SolicitacaoApi.getAll().then(setSolicitacoes);
-    });
-    socket.on("solicitacaoRemovida", () => {
-      SolicitacaoApi.getAll().then(setSolicitacoes);
-    });
-    socket.on("solicitacaoAtualizada", () => {
-      SolicitacaoApi.getAll().then(setSolicitacoes);
-    });
+    socket.on("novaSolicitacao", updateSolicitacoes);
+    socket.on("solicitacaoRemovida", updateSolicitacoes);
+    socket.on("solicitacaoAtualizada", updateSolicitacoes);
 
     return () => {
       clearInterval(interval);
@@ -35,16 +44,11 @@ function PainelSolicitacoes({ onSelect }) {
       socket.off("solicitacaoRemovida");
       socket.off("solicitacaoAtualizada");
     };
-  }, []);
-
-  // Filtra solicitações que têm lavador atribuído apenas na página inicial
-  const filteredSolicitacoes = location.pathname === "/" 
-    ? solicitacoes.filter(item => !item.lavador)
-    : solicitacoes;
+  }, [hideEncerrado, location.pathname]);
 
   return (
     <section className="painel">
-      {filteredSolicitacoes.map((item) => (
+      {solicitacoes.map((item) => (
         <CardSolicitacao
           key={item.id}
           item={item}

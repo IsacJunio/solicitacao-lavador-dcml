@@ -15,7 +15,6 @@ const initialFormState = {
   hora_saida: "",
   prioridade: "",
   setor: "",
-  lavador: "",
 };
 
 const Home = () => {
@@ -32,6 +31,7 @@ const Home = () => {
     const formToSend = {
       ...form,
       nm: Number(form.nm),
+      lavador: "Aberto"
     };
     SolicitacaoApi.create(formToSend)
       .then(() => {
@@ -58,7 +58,7 @@ const Home = () => {
     <>
       <Header onSolicitar={handleOpenModal} />
       <div className="home-content">
-        <PainelSolicitacoes />
+        <PainelSolicitacoes hideEncerrado={true} onSelect={null} />
         {modalOpen && (
           <div className="modal-form-bg">
             <form className="form-solicitacao" onSubmit={handleSubmit}>
@@ -106,13 +106,18 @@ const Home = () => {
                   placeholder="Hora Entrada"
                   required
                 />
-                <input
+                <select
                   name="prioridade"
                   value={form.prioridade}
                   onChange={handleChange}
-                  placeholder="Prioridade"
                   required
-                />
+                  className="form-select"
+                >
+                  <option value="">Selecione a Prioridade</option>
+                  <option value="Urgente">Urgente</option>
+                  <option value="Importante">Importante</option>
+                  <option value="Normal">Normal</option>
+                </select>
                 <input
                   name="setor"
                   value={form.setor}
