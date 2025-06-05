@@ -22,7 +22,7 @@ const PainelSolicitacoes = ({ onSelect, hideEncerrado }) => {
         } 
         // Em outras páginas, se hideEncerrado for true, filtra fora os encerrados
         else if (hideEncerrado) {
-          filteredData = data.filter(item => item.lavador !== "Encerrado");
+          filteredData = data.filter(item => item.lavador === "Aberto" || item.lavador === "Em Lavagem");
         }
         setSolicitacoes(filteredData);
       })

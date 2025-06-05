@@ -1,55 +1,128 @@
-# Sistema de Solicitação do Lavador
+# Sistema de Solicitação do Lavador - DCML
 
-Sistema para gerenciamento de solicitações de lavagem, desenvolvido com React no frontend e Node.js no backend.
+Sistema para gerenciamento de solicitações de lavagem, desenvolvido para a DCML. O sistema permite o controle e acompanhamento em tempo real das solicitações de lavagem de peças e componentes.
 
-## Funcionalidades
+## 🚀 Funcionalidades
 
-- Cadastro de solicitações de lavagem
-- Acompanhamento em tempo real do status das solicitações
-- Sistema de prioridades (Urgente, Importante, Normal)
-- Status de lavagem (Aberto, Em Lavagem, Encerrado)
-- Interface responsiva para desktop e mobile
+- **Gestão de Solicitações**
+  - Cadastro de novas solicitações de lavagem
+  - Edição e exclusão de solicitações existentes
+  - Acompanhamento em tempo real do status
+  
+- **Sistema de Prioridades**
+  - Urgente
+  - Importante
+  - Normal
 
-## Tecnologias Utilizadas
+- **Status de Lavagem**
+  - Aberto (status inicial automático)
+  - Em Lavagem
+  - Encerrado
 
-- Frontend: React.js
-- Backend: Node.js
-- Banco de Dados: MongoDB
-- Comunicação em tempo real: Socket.IO
+- **Recursos Adicionais**
+  - Interface responsiva (desktop e mobile)
+  - Atualização em tempo real via WebSocket
+  - Capitalização automática de textos
+  - Filtros por status de lavagem
 
-## Instalação
+## 🛠️ Tecnologias Utilizadas
 
-1. Clone o repositório
-2. Instale as dependências do frontend e backend:
+### Frontend
+- React.js
+- Socket.IO Client
+- React Router DOM
+- CSS Modules
+- Vite (build tool)
+
+### Backend
+- Node.js
+- Express
+- Socket.IO
+- Prisma ORM
+- MongoDB
+
+## 📦 Instalação
+
+### Pré-requisitos
+- Node.js (versão 14 ou superior)
+- MongoDB instalado e rodando
+- Git
+
+### Passos para Instalação
+
+1. Clone o repositório:
 ```bash
-# Backend
-cd backend
-npm install
-
-# Frontend
-cd frontend
-npm install
+git clone [URL_DO_REPOSITÓRIO]
 ```
 
-3. Inicie o servidor backend e frontend em terminais separados:
+2. Backend Setup:
 ```bash
-# Backend
 cd backend
-npm start
+npm install
+# Configure o arquivo .env com suas variáveis de ambiente
+# Exemplo:
+# DATABASE_URL="mongodb://localhost:27017/lavador"
+# PORT=3000
 
-# Frontend
-cd frontend
+# Execute as migrações do Prisma
+npx prisma generate
+npx prisma db push
+
+# Inicie o servidor
 npm start
 ```
 
-## Contribuição
+3. Frontend Setup:
+```bash
+cd frontend
+npm install
+# Configure o arquivo .env se necessário
+npm run dev
+```
 
-Solicitações de melhoria e correções podem ser encaminhadas para a equipe de desenvolvimento responsável.
+## 🚀 Uso
 
-## Contato
+1. Acesse o sistema através do navegador (padrão: http://localhost:5173)
+2. Na página inicial:
+   - Visualize solicitações com status "Aberto"
+   - Adicione novas solicitações (status inicial será "Aberto")
+   
+3. No Menu:
+   - Gerencie todas as solicitações
+   - Edite status, prioridades e demais informações
+   - Visualize solicitações "Aberto" e "Em Lavagem"
 
-Para dúvidas, suporte ou informações comerciais, entre em contato pelo e-mail: [isac.lima@dcml.com.br]
+## 🔧 Estrutura do Projeto
+
+### Frontend
+```
+frontend/
+├── src/
+│   ├── components/     # Componentes React
+│   ├── Routes/         # Páginas e rotas
+│   ├── services/       # Serviços e API
+│   └── contexts/       # Contextos React
+```
+
+### Backend
+```
+backend/
+├── prisma/            # Schemas e migrações
+├── routes/            # Rotas da API
+├── generated/         # Arquivos gerados
+└── server.js         # Entrada da aplicação
+```
+
+## 👥 Contato e Suporte
+
+Para dúvidas, suporte ou informações comerciais:
+- Email: isac.lima@dcml.com.br
+- Departamento: DCML
+
+## 📄 Licença
+
+© 2024 DCML. Todos os direitos reservados.
 
 ---
 
-© 2025 DCML-IsacJunio. Todos os direitos reservados.
+Desenvolvido com ❤️ pela equipe DCML
