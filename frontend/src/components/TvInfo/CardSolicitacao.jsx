@@ -50,7 +50,8 @@ function CardSolicitacao({ item, onClick }) {
         {capitalizeFirstLetter(item.responsaveis) || "-"}
       </p>
       <p>
-        <strong>Lavador:</strong> {capitalizeFirstLetter(item.lavador) || "-"}
+        <strong>Lavador:</strong>{" "}
+        {capitalizeFirstLetter(item.lavador) || "Aberto"}
       </p>
       <p>
         <strong>Setor:</strong> {capitalizeFirstLetter(item.setor)}
