@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { io } from "socket.io-client";
 import CardSolicitacao from "./CardSolicitacao";
 import SolicitacaoApi from "../../services/Solicitacao";
@@ -12,13 +12,13 @@ const PainelSolicitacoes = ({ onSelect, hideEncerrado }) => {
   const [solicitacoes, setSolicitacoes] = useState([]);
   const location = useLocation();
 
-  const updateSolicitacoes = () => {
+  const updateSolicitacoes = useCallback(() => {
     SolicitacaoApi.getAll()
       .then((data) => {
         let filteredData = data;
-        // Na página inicial, mostra apenas solicitações sem lavador atribuído
+        // Na página inicial, mostra solicitações sem lavador atribuído e em lavagem
         if (location.pathname === "/") {
-          filteredData = data.filter(item => item.lavador === "Aberto");
+          filteredData = data.filter(item => item.lavador === "Aberto" || item.lavador === "Em Lavagem");
         } 
         // Em outras páginas, se hideEncerrado for true, filtra fora os encerrados
         else if (hideEncerrado) {
@@ -27,7 +27,7 @@ const PainelSolicitacoes = ({ onSelect, hideEncerrado }) => {
         setSolicitacoes(filteredData);
       })
       .catch((err) => console.error(err));
-  };
+  }, [hideEncerrado, location.pathname]);
 
   useEffect(() => {
     updateSolicitacoes();
@@ -44,7 +44,7 @@ const PainelSolicitacoes = ({ onSelect, hideEncerrado }) => {
       socket.off("solicitacaoRemovida");
       socket.off("solicitacaoAtualizada");
     };
-  }, [hideEncerrado, location.pathname]);
+  }, [updateSolicitacoes]);
 
   return (
     <section className="painel">
